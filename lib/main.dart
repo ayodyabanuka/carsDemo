@@ -1,7 +1,9 @@
+import 'package:cars_app/HomePage.dart';
 import 'package:cars_app/Screens/splashScreen.dart';
 import 'package:cars_app/controller/facebook_login_controller.dart';
 import 'package:cars_app/controller/google_login_controller.dart';
 import 'package:cars_app/login.dart';
+import 'package:cars_app/provider/carDetailsProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,13 +25,17 @@ class MyApp extends StatelessWidget {
             create: (context) => FacebookSignInController(),
             child: LoginPage(),
           ),
+          ChangeNotifierProvider(
+            create: (context) => carProvider(),
+            child: HomePage(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: SplashScreen(),
+          home: HomePage(),
         ));
   }
 }
