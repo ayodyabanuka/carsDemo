@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cars_app/model/car.dart';
 import 'package:cars_app/provider/carDetailsProvider.dart';
 import 'package:cars_app/singleCar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -60,22 +62,11 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(20),
                             child: Row(
                               children: [
-                                /**Image.network(snapshot.data![index].imageURL,
-                                    scale: 5, errorBuilder:
-                                        (BuildContext context, Object exception,
-                                            StackTrace? stackTrace) {
-                                  // Appropriate logging or analytics, e.g.
-                                  // myAnalytics.recordError(
-                                  //   'An error occurred loading "https://example.does.not.exist/image.jpg"',
-                                  //   exception,
-                                  //   stackTrace,
-                                  // );
-                                  return Text('😢');
-                                }),
                                 //Image.network(
                                 //snapshot.data![index].imageURL,
                                 // scale: 20,
-                                //),*/
+                                //),
+
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
