@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => carProvider(),
-            child: HomePage(),
           ),
         ],
         child: MaterialApp(

@@ -48,19 +48,35 @@ class _HomePageState extends State<HomePage> {
                             context
                                 .read<carProvider>()
                                 .setSingleCarName(snapshot.data![index].name);
-                            context.read<carProvider>().setSingleCarImageURL(
-                                snapshot.data![index].imageURL);
+                            //context.read<carProvider>().setSingleCarImageURL(
+                            //snapshot.data![index].imageURL);
 
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SingleCarDetails()));
+                                    builder: (context) =>
+                                        SingleCarDetails(index: index)));
                           },
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.all(20),
                             child: Row(
                               children: [
-                                Image.network(snapshot.data![index].imageURL),
+                                /**Image.network(snapshot.data![index].imageURL,
+                                    scale: 5, errorBuilder:
+                                        (BuildContext context, Object exception,
+                                            StackTrace? stackTrace) {
+                                  // Appropriate logging or analytics, e.g.
+                                  // myAnalytics.recordError(
+                                  //   'An error occurred loading "https://example.does.not.exist/image.jpg"',
+                                  //   exception,
+                                  //   stackTrace,
+                                  // );
+                                  return Text('😢');
+                                }),
+                                //Image.network(
+                                //snapshot.data![index].imageURL,
+                                // scale: 20,
+                                //),*/
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
@@ -81,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                     height: 100,
                     decoration: BoxDecoration(
                         color: Colors.black12,
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
                   );
                 });
           }
