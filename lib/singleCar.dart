@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SingleCarDetails extends StatefulWidget {
-  late int index = 1;
-  SingleCarDetails({Key? key, required int index}) : super(key: key);
+  SingleCarDetails({Key? key}) : super(key: key);
 
   @override
   _SingleCarDetailsState createState() => _SingleCarDetailsState();
@@ -13,7 +12,6 @@ class SingleCarDetails extends StatefulWidget {
 
 class _SingleCarDetailsState extends State<SingleCarDetails> {
   late Future<List<car>> cars;
-  late int index1;
 
   @override
   void initState() {
@@ -23,7 +21,6 @@ class _SingleCarDetailsState extends State<SingleCarDetails> {
 
   @override
   Widget build(BuildContext context) {
-    index1 = widget.index;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
@@ -46,7 +43,7 @@ class _SingleCarDetailsState extends State<SingleCarDetails> {
                             EdgeInsets.only(top: 10, bottom: 10, right: 20),
                         child: Column(
                           children: [
-                            Text(snapshot.data![index1].name,
+                            Text(context.read<carProvider>().getSingleCarName(),
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 30,

@@ -54,8 +54,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        SingleCarDetails(index: index)));
+                                    builder: (context) => SingleCarDetails()));
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(20),

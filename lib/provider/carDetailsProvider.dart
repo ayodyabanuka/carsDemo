@@ -10,24 +10,24 @@ class carProvider with ChangeNotifier {
   String singleCarName = "";
   String singleCarImageURL = "";
 
-  get getSingleCarid {
-    this.singleCarid;
+  String getSingleCarid() {
+    return this.singleCarid;
   }
 
   void setSingleCarid(String singleCarid) {
     this.singleCarid = singleCarid;
   }
 
-  get getSingleCarName {
-    this.singleCarName;
+  String getSingleCarName() {
+    return this.singleCarName;
   }
 
   void setSingleCarName(singleCarName) {
     this.singleCarName = singleCarName;
   }
 
-  get getSingleCarImageURL {
-    this.singleCarImageURL;
+  String getSingleCarImageURL() {
+    return this.singleCarImageURL;
   }
 
   void setSingleCarImageURL(singleCarImageURL) {
@@ -45,8 +45,8 @@ class carProvider with ChangeNotifier {
         return carList;
       } else {
         for (Map<String, dynamic> item in data) {
-          var offer = car.fromJson(item);
-          carList.add(offer);
+          var cars = car.fromJson(item);
+          carList.add(cars);
         }
         return carList;
       }

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             child: LoginPage(),
           ),
           ChangeNotifierProvider(
-            create: (context) => carProvider(),
+            create: (_) => carProvider(),
           ),
         ],
         child: MaterialApp(
