@@ -1,11 +1,11 @@
-import 'package:cars_app/Provider/auth_provider.dart';
 import 'package:cars_app/Screens/HomePage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cars_app/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -40,93 +40,84 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 150,
               ),
-
-              //Google Signin Button
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  MaterialButton(
-                    onPressed: () {
-                      FirebaseAuthClass()
-                          .signInWithGoogle()
-                          .then((UserCredential value) {
-                        final displayName = value.user.displayName;
-
-                        print(displayName);
-
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                            (route) => false);
-                      });
-                    },
-                    child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.red,
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.google,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Continue with Google",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ])),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  //Facebook Signin Button
-                  MaterialButton(
-                    onPressed: () {
-                      FirebaseAuthClass()
-                          .signInWithFacebook()
-                          .then((UserCredential value) {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                            (route) => false);
-                      });
-                    },
-                    child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.blueAccent,
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.facebookF,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Continue with Facebook",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ])),
-                  ),
-                ],
-              )
+              Consumer<LoginController>(builder: (context, model, child) {
+                // if we are already logged in
+                if (model.userDetails != null) {
+                  return HomePage();
+                } else {
+                  return LoginButtons(context);
+                }
+              })
             ],
           ),
         ),
       ),
+    );
+  }
+
+  LoginButtons(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        //Google Signin Button
+        MaterialButton(
+          onPressed: () {
+            Provider.of<LoginController>(context, listen: false).googleLogin();
+          },
+          child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.red,
+              ),
+              padding: const EdgeInsets.all(10),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                FaIcon(
+                  FontAwesomeIcons.google,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Continue with Google",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ])),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        //Facebook Signin Button
+        MaterialButton(
+          onPressed: () {
+            Provider.of<LoginController>(context, listen: false)
+                .facebooklogin();
+          },
+          child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.blueAccent,
+              ),
+              padding: const EdgeInsets.all(10),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                FaIcon(
+                  FontAwesomeIcons.facebookF,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Continue with Facebook",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ])),
+        ),
+      ],
     );
   }
 }
