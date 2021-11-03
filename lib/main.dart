@@ -1,7 +1,7 @@
-import 'package:cars_app/Screens/login.dart';
 import 'package:cars_app/Screens/splashScreen.dart';
-import 'package:cars_app/controllers/login_controller.dart';
-
+import 'package:cars_app/controller/facebook_login_controller.dart';
+import 'package:cars_app/controller/google_login_controller.dart';
+import 'package:cars_app/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,19 +14,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => LoginController(),
-          child: LoginPage(),
-        )
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: LoginPage(),
-      ),
-    );
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => GoogleSignInController(),
+            child: LoginPage(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => FacebookSignInController(),
+            child: LoginPage(),
+          ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: SplashScreen(),
+        ));
   }
 }

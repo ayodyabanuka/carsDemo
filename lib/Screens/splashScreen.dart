@@ -1,4 +1,4 @@
-import 'package:cars_app/Screens/login.dart';
+import 'package:cars_app/login.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
